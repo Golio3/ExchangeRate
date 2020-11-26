@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ExchangeRate.Models.ExchangeRateModel>
+
+@{
+    ViewData["Title"] = "Kurzy devizového trhu";
+}
+
+<p class="h1 pt-3">Kurzy devizového trhu</p>
+
+<a asp-action="Cz"><button type="button" class="btn btn-primary btn-sm mt-2 mb-2">Nahrát kurzy</button></a>
+<a asp-action="Eur"><button type="button" class="btn btn-primary btn-sm mt-2 mb-2">Přepočet měn na EUR</button></a>
+
+<div class="container">
+    @if (Model == null || Model.Count() == 0)
+    {
+        <div class="row alert alert-danger" role="alert">
+            Kurzy nenačteny
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col border bg-secondary p-3">
+                země
+            </div>
+            <div class="col border bg-secondary p-3">
+                měna
+            </div>
+            <div class="col border bg-secondary p-3">
+                množství
+            </div>
+            <div class="col border bg-secondary p-3">
+                kód
+            </div>
+            <div class="col border bg-secondary p-3">
+                kurz
+            </div>
+        </div>
+        @foreach (var item in Model)
+        {
+            <div class="row">
+                <div class="col border bg-light p-3">
+                    @Html.DisplayFor(modelItem => item.country)
+                </div>
+                <div class="col border bg-light p-3">
+                    @Html.DisplayFor(modelItem => item.currency)
+                </div>
+                <div class="col border bg-light p-3">
+                    @Html.DisplayFor(modelItem => item.amount)
+                </div>
+                <div class="col border bg-light p-3">
+                    @Html.DisplayFor(modelItem => item.code)
+                </div>
+                <div class="col border btn-light p-3">
+                    @Html.DisplayFor(modelItem => item.rate)
+                </div>
+            </div>
+        }
+    }
+</div>
